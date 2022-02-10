@@ -1,13 +1,29 @@
+//libreria de node que me permite, realizar tareas relacionadas con el path,
+//como por ejemplo utilizar el path actual del archivo que este trabajando,
+//y evita que escriba a mano la direccioj completa.
 const path = require('path');
+
+//plugin para que webpack procese y minifique los archivos html del proyecto
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 //este plugin sirve para trabajar con css, dividido en diferentes partes
 //de la aplicaion y luego unirlo.
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+//plugin para copiar archivos (epecialmente de medios) en la carpeta principal
+//de webpack dist, aunque hay mejores metodos para agragarlos.
 const CopyPlugin = require('copy-webpack-plugin');
+
+//este plugin ayuda a minificar y optimizar el codgio css, se utiliza especialmente
+//en el modo produccion.
 const CssMinimizarPlugin = require('css-minimizer-webpack-plugin');
+
+//optimiza y minifica mas los archivos JS, usado especialmente en el modo produccion
 const TerserPlugin = require('terser-webpack-plugin'); 
+
+//plugin para el manejo de varibes de entrno de la aplicacion
 const Dotenv = require('dotenv-webpack');
+
 //esta linea es para que se agrgue ayuda de autocompletado al
 //archivo de configuraciones de webpack, nos facilita la vida
 /** @type {import('webpack').Configuration} */
@@ -38,6 +54,8 @@ module.exports = {
     resolve:{
         //extensiones que se van a trabajar en nuetro proyecto
         extensions: ['.js'],
+
+        //alias de path para usar en nuestro proyecto y optimizar estas direcciones
         alias:{
             '@utils': path.resolve(__dirname, 'src/utils/'),
             '@templates': path.resolve(__dirname, 'src/templates/'),
@@ -121,7 +139,7 @@ module.exports = {
     plugins:[
         new HtmlWebpackPlugin({
 
-            //el lugar donde voy a inyectar el html,
+            //el lugar donde voy a inyectar el js en el html,
             //inject recibe, true, false, head, body.
             inject: 'body',
             
@@ -133,9 +151,15 @@ module.exports = {
             //nombre del archivo generado por webpack.
             filename: './index.html'
         }),
+
+        //plugin para manejar el css modular,y ademas agregamos un hash
+        // a estos archivos CSS.
         new MiniCssExtractPlugin({
             filename: "assets/[name].[contenthash].css"
         }),
+
+        //plugin para copiar carpetos, donde le establecemos una carpeta origen, 
+        //y una carpeta de destino.
         new CopyPlugin({
             patterns:[
                 {
@@ -143,8 +167,14 @@ module.exports = {
                     to:"assets/images"
                 }
             ]
-        })
+        }),
+
+        //Objeto, para el uso del plguin que maneja las vatiables de entorno
+        new Dotenv(),
     ],
+
+    //configuracion de optiizacion, donde usamos los plugin para minificar
+    //tanto el CSS como el JS
     optimization:{
         minimize: true,
         minimizer:[

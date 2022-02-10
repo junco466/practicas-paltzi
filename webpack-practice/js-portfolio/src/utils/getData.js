@@ -1,4 +1,6 @@
-const API = 'https://randomuser.me/api/';
+//Aqui hago el llamado de la api desde una variable de entrorno
+//configurada con webpaxk, y que se encuentra en el archivo .env
+const API = process.env.API;
 
 const getData = async (id) => {
   const apiURl = id ? `${API}${id}` : API;
