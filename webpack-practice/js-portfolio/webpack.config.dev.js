@@ -14,13 +14,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 //de webpack dist, aunque hay mejores metodos para agragarlos.
 const CopyPlugin = require('copy-webpack-plugin');
 
-//este plugin ayuda a minificar y optimizar el codgio css, se utiliza especialmente
-//en el modo produccion.
-const CssMinimizarPlugin = require('css-minimizer-webpack-plugin');
-
-//optimiza y minifica mas los archivos JS, usado especialmente en el modo produccion
-const TerserPlugin = require('terser-webpack-plugin'); 
-
 //plugin para el manejo de varibes de entrno de la aplicacion
 const Dotenv = require('dotenv-webpack');
 
@@ -49,10 +42,10 @@ module.exports = {
 
         //Espesificamos el nombre de la carpeta donde se van a guardar los
         //assets (imagenes,fuentes,etc).
-        assetModuleFilename: 'assets/images/[hash][ext][query]',
-        
-        clean: true,
+        assetModuleFilename: 'assets/images/[hash][ext][query]'
     },
+    mode: 'development',
+    watch: true,
     resolve:{
         //extensiones que se van a trabajar en nuetro proyecto
         extensions: ['.js'],
@@ -177,11 +170,4 @@ module.exports = {
 
     //configuracion de optiizacion, donde usamos los plugin para minificar
     //tanto el CSS como el JS
-    optimization:{
-        minimize: true,
-        minimizer:[
-            new CssMinimizarPlugin,
-            new TerserPlugin,
-        ]
-    }
 }
