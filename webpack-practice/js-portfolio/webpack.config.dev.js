@@ -17,6 +17,10 @@ const CopyPlugin = require('copy-webpack-plugin');
 //plugin para el manejo de varibes de entrno de la aplicacion
 const Dotenv = require('dotenv-webpack');
 
+//plugin que me permite analizar el uso de dependencias o funciones,
+//de mi aplicacion
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 //esta linea es para que se agrgue ayuda de autocompletado al
 //archivo de configuraciones de webpack, nos facilita la vida
 /** @type {import('webpack').Configuration} */
@@ -45,7 +49,10 @@ module.exports = {
         assetModuleFilename: 'assets/images/[hash][ext][query]'
     },
     mode: 'development',
-    watch: true,
+
+    //Activamos el rastreo del codgio en las devtool de googlechrome.
+    devtool: 'source-map',
+    
     resolve:{
         //extensiones que se van a trabajar en nuetro proyecto
         extensions: ['.js'],
@@ -166,8 +173,13 @@ module.exports = {
 
         //Objeto, para el uso del plguin que maneja las vatiables de entorno
         new Dotenv(),
+        new BundleAnalyzerPlugin(),
     ],
-
-    //configuracion de optiizacion, donde usamos los plugin para minificar
-    //tanto el CSS como el JS
+    devServer:{
+        static: path.join(__dirname, 'dist'),
+        compress: true,
+        historyApiFallback: true,
+        port: 3005,
+        open: true,
+    }
 }
