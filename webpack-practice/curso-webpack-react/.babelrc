@@ -1,0 +1,11 @@
+{   
+    "presets": [
+        "@babel/preset-env",
+
+        //Si agregas esta configuración,Ya no necesitas importar  
+        //React en los archivos donde utilizas sintaxis jsx:
+        ["@babel/preset-react",{
+            "runtime": "automatic"
+        }]
+    ]
+}
