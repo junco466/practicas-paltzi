@@ -1,0 +1,74 @@
+Un componente tiene diferentes ciclos de vida, por ejemplo, cuando se contruyes un compnente,
+cuando se renderiza un componente, cunado se monta un componente, cuando se actualiza y cuando finalmente
+se desmonta.
+
+En react existen diferentes metodos que nos permiten manipular, o realizar acciones justo en estos
+ciclos de vida, para hacer validaciones, o realizar acciones que queramos en el momento
+preciso.
+
+Metodos: 
+
+1. Explicados en clase, y en orden de ejecucion:
+
+constructor(props){
+    Este metodo como en cualquier clase de POO, nos permite inicializar el
+    estados, como tambien enlanzar metodos, o manejadores de eventos a una
+    instacia del objeto. este metodo es el primero que se ejecuta.
+}
+
+render(){
+    Este metodo lo conocemos bien, y en el ciclo de vida es el estado de montaje
+    donde agregamos los elementos definidos al DOM, y tambien luego de actualizarlos,
+    se realisa un render para para montar los cambios en el DOM.
+}
+
+componentDidMount(){
+    Como su nombre lo indica este es el ciclo de vida, que se ubica justo despues de hacer
+    el render o en otras palabras, de haber montado un elemento, por ejemplo, si hacemos un render
+    inicial de la pagina, pero luego necesitamos hacer una peticion a una API para obtener datos
+    externos, en este metodo, es donde realizamos esta funcion asincrona. aqui realizamos la peticion
+    y cambiamos el state del componente, cuando esto sucede, se ejecuta otro metodo, el cual es 
+    componentDidUpdate(). osea se actualiza el componente.
+}
+
+componentDidUpdate(prevProps, prevState){
+    Este metodo se ejecuta justo despues de realizar una actualizacion, como por ejemplo, cambiar
+    el estado o los props, y nos premite obtener los valores previos de estos, con lo cual
+    posteriormente podemos hacer validaciones.
+}
+
+componentWillUnmount(){
+    Este es el momente justo antes de que se valla el componente de DOM,
+    antes que salga de escena. Aqui muchas veces hacemos las cancelaciones de 
+    las funciones asincronas que por alguna u otra razon no se completan antes de que
+    se actualice la pagina, esto puede ser porque un cliente envio una peticion a la API
+    pero rapidamente cambio de pagina, para evitar errores, antes de que el componente salga
+    de escena estas funciones se cancelan.
+}
+
+2. Algunos otros metodos no explicados en clase:
+
+componentWillMonunt(){
+	Este método se ejecuta cuando el componente se está por renderizar. 
+    En este punto es posible modificar el estado del componente sin causar una actualización 
+    (y por lo tanto no renderizar dos veces el componente).
+}
+
+componentWillReceiveProps(nextProps){
+	Este método se ejecuta inmediatamente después que el componente reciba nuevas propiedades.
+    En este punto es posible actualizar el estado para que refleje el cambio de propiedades, 
+    ya sea reiniciando su valor inicial o cambiándolo por uno nuevo.
+}
+
+shouldComponentUpdate(nextProps, nextState){
+	Este método (el cual debe ser puro) se ejecuta antes de empezar a actualizar un componente,
+     cuando llegan las nuevas propiedades (nextProps) y el nuevo estado (nextState).
+
+    Acá es posible validar que estos datos sean diferentes de los anteriores (this.props y this.state) 
+    y devolver true o false dependiendo de si queremos volver a renderizar o no el componente.
+}
+
+componentWillUpdate(nextProps, nextState){
+	Una vez el método anterior devolvió true se ejecuta este método, acá es posible realizar 
+    cualquier tipo de preparación antes de que se actualice de la UI
+}	
