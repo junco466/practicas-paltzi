@@ -3,10 +3,6 @@
 @import url('https://fonts.googleapis.com/css?family=Anton');
 
 
-html{
-  font-size: 62.5%;
-}
-
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

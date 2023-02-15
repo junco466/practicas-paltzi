@@ -21,14 +21,12 @@ import BadgeNew from '../pages/BadgeNew';
 import Badges from '../pages/Badges';
 import Layout from './Layout';
 import MiComponente404 from '../pages/MiComponente404';
-import HomePage from '../pages/HomePage';
 
 function App(){
     return (
         <BrowserRouter>
             <Layout>
                 <Switch>
-                    <Route exact path="/" component={HomePage}/>
                     <Route exact path="/badges" component={Badges}/>
                     <Route exact path="/badges/new" component={BadgeNew}/>
                     <Route path="/404" component={MiComponente404} />

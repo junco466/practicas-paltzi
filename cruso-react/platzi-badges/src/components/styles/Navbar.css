@@ -2,20 +2,18 @@
   width: 100%;
   padding: 0.5rem 0;
   background-color: #1C3643;
-  font-size: 1.6rem;
-  z-index: 10;
 }
 
 .Navbar__brand {
   color: #ffffff;
-  text-decoration: none;
-  
+
   display: flex;
   align-items: center;
 }
 
 .Navbar__brand:hover {
-  color: #43947d;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .Navbar__brand-logo {

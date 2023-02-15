@@ -1,9 +1,0 @@
-props es una abreviacion de properties, se utilizan con el objetivo de que las 
-clases sean reutilizable,estos props son argumentos a una funcion,
-en este caso hacia nuestro componenete, y se escriben como atributos que  
-pasamos al componenete desde el index.js en la etiqueta de jsx
-que invoca al componenete, estos atributos, se vuelven variables
-que podemos usar en el componente, y se invocan con
-this.props.nombre_del_atributo.
-
-Esto con el proposito de hacer el contenido del componente dinamico
